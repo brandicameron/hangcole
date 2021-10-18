@@ -1,0 +1,226 @@
+$accent-color: #4000ff;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  // border: 10px solid #333;
+  // border-image-source: linear-gradient(to right, #3f11c6, $accent-color);
+  // border-image-slice: 1;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.element {
+  position: absolute;
+  background: #333;
+}
+
+.title {
+  margin: 20px 0 50px 0;
+  font-family: "Kanit", sans-serif;
+  font-size: 3.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffd028;
+  color: #01c480;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: $accent-color;
+  transform: translateZ(0);
+  text-shadow: 1px 1px 0px $accent-color, 2px 2px 0px $accent-color,
+    3px 3px 0px $accent-color, 4px 4px 0px $accent-color,
+    5px 5px 0px $accent-color, 6px 6px 0px $accent-color,
+    7px 7px 0px $accent-color, 8px 8px 0px $accent-color,
+    9px 9px 0px $accent-color, 10px 10px 0px $accent-color,
+    11px 11px 0px $accent-color, 12px 12px 0px $accent-color,
+    13px 13px 0px $accent-color, 14px 14px 0px $accent-color,
+    15px 15px 0px $accent-color, 16px 16px 0px $accent-color,
+    17px 17px 0px $accent-color, 18px 18px 0px $accent-color,
+    19px 19px 0px $accent-color, 20px 20px 0px $accent-color,
+    21px 21px 0px $accent-color;
+}
+
+.gallows-container {
+  position: relative;
+  height: 175px;
+  width: 175px;
+  margin: 0 auto;
+}
+
+.base {
+  @extend .element;
+  width: 100%;
+  height: 5px;
+  bottom: 0;
+}
+
+.stand {
+  @extend .element;
+  height: 100%;
+  width: 5px;
+}
+
+.top-bar {
+  @extend .element;
+  width: 100px;
+  height: 5px;
+}
+
+.hang-bar {
+  @extend .element;
+  height: 35px;
+  width: 5px;
+  left: 90px;
+}
+
+.hangman-container {
+  position: relative;
+  transform: scale(0.13);
+  top: 18px;
+  left: 5px;
+}
+
+.head {
+  transform: scale(1.5);
+  z-index: 100;
+  top: -45px;
+}
+
+.torso {
+  top: 200px;
+}
+
+.right-arm {
+  top: 245px;
+  transform: translateX(-140px);
+}
+
+.left-arm {
+  top: 245px;
+  transform: translateX(138px);
+}
+
+.right-leg {
+  top: 445px;
+  transform: translateX(-70px) scaleY(0.8);
+}
+
+.left-leg {
+  top: 445px;
+  transform: translateX(65px) scaleY(0.8);
+}
+
+.head,
+.torso,
+.right-arm,
+.left-arm,
+.right-leg,
+.left-leg {
+  position: absolute;
+  display: none;
+}
+
+.game-word-container {
+  position: relative;
+  @extend .flex;
+  width: 80vw;
+  margin: 30px auto;
+  font-size: 1.5rem;
+}
+
+.game-letter {
+  position: relative;
+  width: 30px;
+  padding-bottom: 1px;
+  color: transparent;
+  text-align: center;
+}
+
+.game-letter::after {
+  @extend .element;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  content: "";
+  width: 20px;
+  height: 5px;
+  bottom: 0;
+}
+
+.show-letter {
+  color: #333;
+}
+
+.alphabet-buttons {
+  @extend .flex;
+  width: 85vw;
+  max-width: 400px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(35px, 1fr));
+  gap: 7px;
+}
+
+.letter-button {
+  @extend .flex;
+  font-weight: bold;
+  font-size: 1.3rem;
+  border: none;
+  width: 20px;
+  height: 20px;
+  padding: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: rgb(236, 236, 236);
+}
+
+.incorrect {
+  background: rgb(225, 65, 56);
+  color: #fff;
+  cursor: default;
+}
+
+.correct {
+  background: rgb(11, 156, 11);
+  background: #01c480;
+  color: #fff;
+  cursor: default;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+}
+
+.answer {
+  margin: 0 5px;
+}
+
+.start-btn {
+  width: 200px;
+  height: 45px;
+  margin: 0 auto;
+  background: rgb(11, 156, 11);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+}
+
+.hidden {
+  display: none;
+}
