@@ -49,13 +49,6 @@ body {
     19px 19px 0px $accent-color, 20px 20px 0px $accent-color, 21px 21px 0px $accent-color;
 }
 
-.logo-head {
-  position: relative;
-  @extend .flex;
-  margin: 10px auto -30px auto;
-  z-index: 10;
-}
-
 .gallows-container {
   position: relative;
   height: 175px;
