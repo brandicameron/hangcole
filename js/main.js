@@ -19,27 +19,32 @@ function createAlphabetBtns() {
   });
 }
 
-function removeElement(element) {
-  const allElements = document.querySelectorAll(element);
-  allElements.forEach((el) => el.remove());
-}
-
-function createGameWord() {
+function displayGameSentence() {
   shuffle(gameWords);
-  const gameWord = gameWords[roundsPlayed].toUpperCase();
-  currentGameWord = [...gameWord];
-  const gameWordContainer = document.querySelector('.game-word-container');
+  const roundSentence = gameWords[roundsPlayed];
+  const sentenceContainer = document.querySelector('.game-sentence-container');
 
-  currentGameWord.forEach((letter) => {
-    let gameWordLetter = document.createElement('p');
-    gameWordLetter.className = `game-letter game-letter-${letter}`;
-    gameWordLetter.textContent = letter;
-    gameWordContainer.appendChild(gameWordLetter);
+  roundSentence.forEach((word) => {
+    const singleWord = document.createElement('span');
+    singleWord.className = 'word';
+    sentenceContainer.appendChild(singleWord);
+    const capitalizedWord = word[0].toUpperCase();
+    currentGameWord.push(capitalizedWord);
+
+    let gameWord = capitalizedWord.split('');
+
+    gameWord.forEach((letter) => {
+      let gameWordLetter = document.createElement('p');
+      gameWordLetter.className = `game-letter game-letter-${letter}`;
+      gameWordLetter.textContent = letter;
+      singleWord.appendChild(gameWordLetter);
+
+      if (gameWordLetter.textContent === "'") {
+        gameWordLetter.classList.add('show-letter');
+        correctLetters.push(letter);
+      }
+    });
   });
-}
-
-function showHide(element) {
-  element.classList.toggle('hidden');
 }
 
 function resetHangman() {
@@ -81,12 +86,12 @@ function startGame() {
   showHide(playButton);
   showHide(alphabetBtnsContainer);
   removeElement('.letter-button');
-  removeElement('.game-letter');
+  removeElement('.word');
   resetHangman();
 
   //create board
   createAlphabetBtns();
-  createGameWord();
+  displayGameSentence();
 }
 
 function checkForMatch(e) {
@@ -117,10 +122,11 @@ function checkForMatch(e) {
 }
 
 function checkWin() {
-  const array1 = currentGameWord.sort().join('');
+  const array1 = currentGameWord.join('').split('').sort().join('');
   const array2 = correctLetters.sort().join('');
   const gameWordLetters = document.querySelectorAll('.game-letter');
-  const messageContainer = document.querySelector('.message-container');
+
+  console.log({ array1, array2, gameWordLetters });
 
   if (array1 === array2) {
     showHide(alphabetBtnsContainer);
@@ -136,6 +142,16 @@ function checkWin() {
     roundsPlayed++;
     gameWordLetters.forEach((letter) => (letter.style.color = 'red'));
   }
+}
+
+//helper functions
+function showHide(element) {
+  element.classList.toggle('hidden');
+}
+
+function removeElement(element) {
+  const allElements = document.querySelectorAll(element);
+  allElements.forEach((el) => el.remove());
 }
 
 alphabetBtnsContainer.addEventListener('click', checkForMatch);
