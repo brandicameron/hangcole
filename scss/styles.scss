@@ -51,8 +51,9 @@ body {
 
 .gallows-container {
   position: relative;
-  height: 175px;
-  width: 175px;
+  height: 55vh;
+  width: auto;
+  aspect-ratio: 1/1;
   margin: 0 auto;
 }
 
@@ -71,7 +72,7 @@ body {
 
 .top-bar {
   @extend .element;
-  width: 100px;
+  width: 50%;
   height: 5px;
 }
 
@@ -88,44 +89,14 @@ body {
   @extend .element;
   height: 35px;
   width: 5px;
-  left: 90px;
+  left: 50%;
 }
 
 .hangman-container {
   position: relative;
   transform: scale(0.13);
-  top: 18px;
+  top: 8%;
   left: 5px;
-}
-
-.head {
-  transform: scale(1.5);
-  z-index: 100;
-  top: -45px;
-}
-
-.torso {
-  top: 200px;
-}
-
-.right-arm {
-  top: 245px;
-  transform: translateX(-140px);
-}
-
-.left-arm {
-  top: 245px;
-  transform: translateX(138px);
-}
-
-.right-leg {
-  top: 445px;
-  transform: translateX(-70px) scaleY(0.8);
-}
-
-.left-leg {
-  top: 445px;
-  transform: translateX(65px) scaleY(0.8);
 }
 
 .head,
@@ -136,6 +107,31 @@ body {
 .left-leg {
   position: absolute;
   display: none;
+}
+
+.head {
+  transform: scale(1.5) translateY(-5%);
+  z-index: 1;
+}
+
+.torso {
+  transform: translateY(53%);
+}
+
+.right-arm {
+  transform: translateY(49.5%) translateX(-76%);
+}
+
+.left-arm {
+  transform: translateY(49.5%) translateX(77%);
+}
+
+.right-leg {
+  transform: translateY(60%) translateX(-40.5%) scale(0.8);
+}
+
+.left-leg {
+  transform: translateY(60%) translateX(40%) scale(0.8);
 }
 
 .game-sentence-container {
@@ -183,7 +179,8 @@ body {
   max-width: 400px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(35px, 1fr));
-  gap: 6px;
+  gap: 8px;
+  touch-action: manipulation;
 }
 
 .letter-button {
@@ -237,7 +234,35 @@ body {
   display: none;
 }
 
+@media screen and (pointer: coarse) and (orientation: landscape) {
+  .gallows-container {
+    height: 40vh;
+    margin-top: -1rem;
+  }
+
+  .letter-button {
+    font-size: 1.75rem;
+    width: 40px;
+    height: 40px;
+  }
+
+  .alphabet-buttons {
+    max-width: 450px;
+    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+  }
+}
+
 @media screen and (max-width: 600px) {
+  .title {
+    font-size: 2.5rem;
+    margin-top: 10px;
+  }
+
+  .gallows-container {
+    height: 29vh;
+    margin-top: -1rem;
+  }
+
   .game-sentence-container {
     flex-wrap: wrap;
     gap: 1rem;

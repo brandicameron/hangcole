@@ -10,6 +10,7 @@ VIEW LIVE: [https://brandicameron.github.io/bp-react/](https://brandicameron.git
 
 ## Things Learned:
 
+- Discovered "touch-action: manipulation" css property to prevent touchscreens from zooming in if user accidentally double taps the alphabet buttons. 😃 🤯
 - Experimenting with javaScript modules in this one.
 
 ---
