@@ -4,6 +4,7 @@ import { shuffle } from './shuffle.js';
 const alphabetBtnsContainer = document.querySelector('.alphabet-buttons');
 const playButton = document.querySelector('.start-btn');
 const head = document.querySelector('.head');
+let shuffledGameWords;
 let currentGameWord = [];
 let correctLetters = [];
 let incorrectLetters = 0;
@@ -19,12 +20,17 @@ function createAlphabetBtns() {
   });
 }
 
+function shuffleGameWords() {
+  shuffledGameWords = shuffle(gameWords);
+}
+
+shuffleGameWords();
+
 function displayGameSentence() {
-  shuffle(gameWords);
-  const roundSentence = gameWords[roundsPlayed];
+  const sentence = shuffledGameWords[roundsPlayed];
   const sentenceContainer = document.querySelector('.game-sentence-container');
 
-  roundSentence.forEach((word) => {
+  sentence.forEach((word) => {
     const singleWord = document.createElement('span');
     singleWord.className = 'word';
     sentenceContainer.appendChild(singleWord);
@@ -79,6 +85,11 @@ function changeFace() {
 }
 
 function startGame() {
+  if (roundsPlayed === shuffledGameWords.length) {
+    shuffleGameWords();
+    roundsPlayed = 0;
+  }
+
   //resets
   currentGameWord = [];
   correctLetters = [];
@@ -96,9 +107,7 @@ function startGame() {
 
 function checkForMatch(e) {
   if (e.target.classList.contains('letter-button')) {
-    let matchingLetters = document.querySelectorAll(
-      `.game-letter-${e.target.textContent}`
-    );
+    let matchingLetters = document.querySelectorAll(`.game-letter-${e.target.textContent}`);
 
     if (matchingLetters.length === 0) {
       e.target.classList.add('incorrect');
@@ -125,8 +134,6 @@ function checkWin() {
   const array1 = currentGameWord.join('').split('').sort().join('');
   const array2 = correctLetters.sort().join('');
   const gameWordLetters = document.querySelectorAll('.game-letter');
-
-  console.log({ array1, array2, gameWordLetters });
 
   if (array1 === array2) {
     showHide(alphabetBtnsContainer);
