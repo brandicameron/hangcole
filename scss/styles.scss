@@ -35,7 +35,6 @@ body {
   font-size: 3.3rem;
   text-align: center;
   text-transform: uppercase;
-  color: #ffd028;
   color: $correct-color;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: $accent-color;
@@ -266,5 +265,36 @@ body {
   .game-sentence-container {
     flex-wrap: wrap;
     gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .title {
+    font-size: 2rem;
+    margin-top: 10px;
+  }
+
+  .title {
+    margin: 5px 0 40px 0;
+    font-size: 2rem;
+    text-shadow: 1px 1px 0px $accent-color, 2px 2px 0px $accent-color, 3px 3px 0px $accent-color,
+      4px 4px 0px $accent-color, 5px 5px 0px $accent-color, 6px 6px 0px $accent-color,
+      7px 7px 0px $accent-color, 8px 8px 0px $accent-color, 9px 9px 0px $accent-color,
+      10px 10px 0px $accent-color, 11px 11px 0px $accent-color, 12px 12px 0px $accent-color;
+  }
+
+  .gallows-container {
+    height: 20vh;
+    margin-top: -1rem;
+    margin-bottom: -1rem;
+  }
+
+  .letter-button {
+    font-size: 1.5rem;
+    padding: 15px;
+  }
+
+  .alphabet-buttons {
+    grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
   }
 }

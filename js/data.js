@@ -29,16 +29,15 @@ export const alphabet = [
 
 export const gameWords = [
   [['yo'], ['mama']],
-  [['down'], ['to'], ['chickentown']],
   [["Let's"], ['play'], ['push']],
   [['sophmore']],
-  [['playstation']],
   [['star'], ['wars']],
   [['hillwood']],
   [['jacob']],
   [["you're"], ['dumb']],
   [['ramen']],
   [['takis']],
+  [['taco'], ['tuesday']],
   [['wings']],
   [['headphones']],
   [['hattie'], ["b's"]],
