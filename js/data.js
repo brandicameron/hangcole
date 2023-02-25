@@ -30,6 +30,7 @@ export const alphabet = [
 export const gameWords = [
   [['yo'], ['mama']],
   [["Let's"], ['play'], ['push']],
+  [['taco'], ['tuesday']],
   [['sophmore']],
   [['star'], ['wars']],
   [['hillwood']],
@@ -37,7 +38,6 @@ export const gameWords = [
   [["you're"], ['dumb']],
   [['ramen']],
   [['takis']],
-  [['taco'], ['tuesday']],
   [['wings']],
   [['headphones']],
   [['hattie'], ["b's"]],

@@ -1,6 +1,7 @@
-$accent-color: #4000ff;
 $accent-color: #2b00ff;
 $correct-color: #01c480;
+$incorrect-color: #e14138;
+$line-width: 8px;
 
 * {
   margin: 0;
@@ -8,14 +9,11 @@ $correct-color: #01c480;
   box-sizing: border-box;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  margin: 0 auto;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
+html {
+  background-color: $correct-color;
 }
+
+// *************** Utilities ***************
 
 .flex {
   display: flex;
@@ -24,17 +22,52 @@ body {
   margin: 0 auto;
 }
 
+.grid-center {
+  display: grid;
+  place-content: center;
+}
+
 .element {
   position: absolute;
   background: $accent-color;
+  border-radius: 2px;
 }
 
+body {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  @extend .grid-center;
+  gap: 2rem;
+  width: 97vw;
+  height: 95vh;
+  border-radius: 2rem;
+  font-family: 'Kanit', Helvetica, sans-serif;
+  background-image: radial-gradient(rgb(1, 196, 128, 30%) 10%, transparent 10%);
+  background-position: 16px 16px;
+  background-size: 16px 16px;
+  background-color: #f5f5f5;
+  overflow: hidden;
+  box-shadow: 2px 2px 20px rgb(43 0 255 / 35%);
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+// *************** Header ***************
+
 .title {
-  margin: 20px 0 50px 0;
   font-family: 'Kanit', sans-serif;
-  font-size: 3.3rem;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 5vw, 3.3rem);
   text-align: center;
   text-transform: uppercase;
+  margin: 0;
   color: $correct-color;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: $accent-color;
@@ -42,16 +75,14 @@ body {
   text-shadow: 1px 1px 0px $accent-color, 2px 2px 0px $accent-color, 3px 3px 0px $accent-color,
     4px 4px 0px $accent-color, 5px 5px 0px $accent-color, 6px 6px 0px $accent-color,
     7px 7px 0px $accent-color, 8px 8px 0px $accent-color, 9px 9px 0px $accent-color,
-    10px 10px 0px $accent-color, 11px 11px 0px $accent-color, 12px 12px 0px $accent-color,
-    13px 13px 0px $accent-color, 14px 14px 0px $accent-color, 15px 15px 0px $accent-color,
-    16px 16px 0px $accent-color, 17px 17px 0px $accent-color, 18px 18px 0px $accent-color,
-    19px 19px 0px $accent-color, 20px 20px 0px $accent-color, 21px 21px 0px $accent-color;
+    10px 10px 0px $accent-color, 11px 11px 0px $accent-color, 12px 12px 0px $accent-color;
 }
+
+// *************** Gallows ***************
 
 .gallows-container {
   position: relative;
-  height: 55vh;
-  width: auto;
+  height: 50vh;
   aspect-ratio: 1/1;
   margin: 0 auto;
 }
@@ -59,39 +90,62 @@ body {
 .base {
   @extend .element;
   width: 100%;
-  height: 5px;
+  height: $line-width;
   bottom: 0;
 }
 
 .stand {
   @extend .element;
   height: 100%;
-  width: 5px;
+  width: $line-width;
 }
 
 .top-bar {
   @extend .element;
   width: 50%;
-  height: 5px;
+  height: $line-width;
 }
 
 .corner-bar {
   @extend .element;
-  width: 30px;
-  height: 5px;
-  left: -2px;
-  top: 10px;
+  width: 70px;
+  height: $line-width;
+  left: -5px;
+  top: 25px;
   transform: rotate(-45deg);
 }
 
 .hang-bar {
   @extend .element;
   height: 35px;
-  width: 5px;
-  left: 50%;
+  width: $line-width;
+  left: 49%;
 }
 
-.hangman-container {
+@keyframes growLinesHorizonal {
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes growLinesVertical {
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes growCornerBar {
+  100% {
+    transform: rotate(-45deg) scaleY(1);
+    opacity: 1;
+  }
+}
+
+// *************** Hangman ***************
+
+.hangman {
   position: relative;
   transform: scale(0.13);
   top: 8%;
@@ -133,12 +187,15 @@ body {
   transform: translateY(60%) translateX(40%) scale(0.8);
 }
 
-.game-sentence-container {
-  position: relative;
+// *************** Game Words ***************
+
+.game-words {
   @extend .flex;
-  width: 80vw;
-  margin: 30px auto;
-  font-size: 1.5rem;
+  flex-wrap: wrap;
+  position: relative;
+  width: 90vw;
+  font-size: 1.75rem;
+  margin-top: 1rem;
 }
 
 .word {
@@ -149,22 +206,23 @@ body {
   margin-left: 15px;
 }
 
-.game-letter {
+.letter {
   position: relative;
   width: 30px;
-  padding-bottom: 1px;
+  padding-bottom: 3px;
   color: transparent;
   text-align: center;
 }
 
-.game-letter::after {
+.letter::after {
   @extend .element;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   content: '';
-  width: 20px;
-  height: 5px;
+  width: 25px;
+  height: $line-width;
+  border-radius: 2px;
   bottom: 0;
 }
 
@@ -172,129 +230,143 @@ body {
   color: $accent-color;
 }
 
-.alphabet-buttons {
-  @extend .flex;
-  width: 85vw;
-  max-width: 400px;
-  display: grid;
+// *************** Footer / Keyboard ***************
+
+footer {
+  @extend .grid-center;
+}
+
+.keyboard {
+  width: min(400px, 90vw);
+  @extend .grid-center;
+  // display: grid;
   grid-template-columns: repeat(auto-fit, minmax(35px, 1fr));
-  gap: 8px;
+  margin-inline: auto;
+  gap: 0.75rem 0.2rem;
   touch-action: manipulation;
 }
 
 .letter-button {
-  @extend .flex;
-  font-weight: bold;
+  @extend .grid-center;
   font-size: 1.5rem;
-  border: none;
-  width: 20px;
-  height: 20px;
-  padding: 17px;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: rgb(236, 236, 236);
   color: $accent-color;
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+  background-color: white;
+  border: 1px solid rgba(0 0 0 / 10%);
+  transition: 100ms linear;
+  filter: drop-shadow(1px 4px 0px rgba(0 0 0 / 15%));
+}
+
+.letter-button:hover {
+  transform: translateY(1px);
+  filter: drop-shadow(1px 3px 0px rgba(0 0 0 / 15%));
+}
+
+.letter-button:active {
+  transform: translateY(3px);
+  filter: drop-shadow(1px 1px 0px rgba(0 0 0 / 15%));
 }
 
 .incorrect {
-  background: rgb(225, 65, 56);
+  background: $incorrect-color;
   color: #fff;
   cursor: default;
+  pointer-events: none;
 }
 
 .correct {
   background: $correct-color;
   color: #fff;
   cursor: default;
-}
-
-.input-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 30px 0;
+  pointer-events: none;
 }
 
 .answer {
   margin: 0 5px;
 }
 
-.start-btn {
-  width: 200px;
-  height: 45px;
-  margin: 0 auto;
+.play-again-button {
+  padding: 0.9rem 3.5rem 1rem 3.5rem;
+  margin: 2rem auto;
   background: $correct-color;
   color: #fff;
-  border: none;
   border-radius: 8px;
+}
+
+.play-again-button:hover {
+  box-shadow: 1px 1px 0px $accent-color, 2px 2px 0px $accent-color, 3px 3px 0px $accent-color,
+    4px 4px 0px $accent-color, 5px 5px 0px $accent-color;
+}
+
+.play-again-button:active {
+  transform: translateY(3px);
+  box-shadow: 1px 1px 0px $accent-color, 2px 2px 0px $accent-color, 3px 3px 0px $accent-color;
 }
 
 .hidden {
   display: none;
 }
 
-@media screen and (pointer: coarse) and (orientation: landscape) {
+.cole {
+  position: absolute;
+  bottom: -550px;
+  right: -150px;
+  transform: rotate(-25deg);
+  width: 250px;
+  overflow: hidden;
+}
+
+// *************** @ media ***************
+
+@media screen and (pointer: coarse) {
+  body {
+    height: 85vh;
+  }
+
   .gallows-container {
     height: 40vh;
-    margin-top: -1rem;
-  }
-
-  .letter-button {
-    font-size: 1.75rem;
-    width: 40px;
-    height: 40px;
-  }
-
-  .alphabet-buttons {
-    max-width: 450px;
-    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
   }
 }
 
 @media screen and (max-width: 600px) {
-  .title {
-    font-size: 2.5rem;
-    margin-top: 10px;
+  body {
+    width: 95vw;
   }
 
   .gallows-container {
-    height: 29vh;
-    margin-top: -1rem;
-  }
-
-  .game-sentence-container {
-    flex-wrap: wrap;
-    gap: 1rem;
+    height: 30vh;
   }
 }
 
-@media screen and (max-width: 350px) {
-  .title {
-    font-size: 2rem;
-    margin-top: 10px;
+@media screen and (max-width: 800px) {
+  .cole {
+    display: none;
   }
+}
 
+@media screen and (max-width: 325px) {
+  body {
+    gap: 1rem;
+  }
   .title {
-    margin: 5px 0 40px 0;
-    font-size: 2rem;
-    text-shadow: 1px 1px 0px $accent-color, 2px 2px 0px $accent-color, 3px 3px 0px $accent-color,
-      4px 4px 0px $accent-color, 5px 5px 0px $accent-color, 6px 6px 0px $accent-color,
-      7px 7px 0px $accent-color, 8px 8px 0px $accent-color, 9px 9px 0px $accent-color,
-      10px 10px 0px $accent-color, 11px 11px 0px $accent-color, 12px 12px 0px $accent-color;
+    margin: 0.5rem 0 0 0;
   }
 
   .gallows-container {
-    height: 20vh;
-    margin-top: -1rem;
-    margin-bottom: -1rem;
+    height: 30vh;
+  }
+
+  .keyboard {
+    width: 95vw;
+    grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
+    gap: 5px;
+    padding: 0 1rem;
   }
 
   .letter-button {
-    font-size: 1.5rem;
-    padding: 15px;
-  }
-
-  .alphabet-buttons {
-    grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+    width: 25px;
+    height: 30px;
   }
 }

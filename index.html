@@ -9,7 +9,7 @@
   <meta name="author" content="Brandi Cameron | hello@brandicameron.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/normalize.css" />
   <link rel="stylesheet" href="css/styles.min.css" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -18,37 +18,46 @@
   <link rel="manifest" href="site.webmanifest">
   <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
   <meta name="msapplication-TileColor" content="#ffc40d">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#2b00ff">
   <meta property="og:title" content="HANGCOLE" />
   <meta property="og:image" content="./img/share.jpg" />
 </head>
 
 <body>
-  <h1 class="title"> hangcole</h1>
+  <header>
+    <h1 class="title">hangcole</h1>
+  </header>
 
-  <div class="gallows-container">
-    <div class="gallows">
-      <div class="base"></div>
-      <div class="stand"></div>
-      <div class="top-bar"></div>
-      <div class="corner-bar"></div>
-      <div class="hang-bar"></div>
+  <main>
+    <div class="gallows-container">
+      <div class="gallows">
+        <div class="base"></div>
+        <div class="stand"></div>
+        <div class="top-bar"></div>
+        <div class="corner-bar"></div>
+        <div class="hang-bar"></div>
+      </div>
+
+      <div class="hangman">
+        <img src="./img/head-1.svg" alt="head" class="head">
+        <img src="./img/torso.svg" alt="torso" class="torso">
+        <img src="./img/right-arm.svg" alt="right arm" class="right-arm">
+        <img src="./img/left-arm.svg" alt="left arm" class="left-arm">
+        <img src="./img/right-leg.svg" alt="right leg" class="right-leg">
+        <img src="./img/left-leg.svg" alt="left leg" class="left-leg">
+      </div>
     </div>
+    <div class="game-words"></div>
 
-    <div class="hangman-container">
-      <img src="./img/head-1.svg" alt="head" class="head">
-      <img src="./img/torso.svg" alt="torso" class="torso">
-      <img src="./img/right-arm.svg" alt="right arm" class="right-arm">
-      <img src="./img/left-arm.svg" alt="left arm" class="left-arm">
-      <img src="./img/right-leg.svg" alt="right leg" class="right-leg">
-      <img src="./img/left-leg.svg" alt="left leg" class="left-leg">
-    </div>
-  </div>
+  </main>
 
 
-  <div class="game-sentence-container"></div>
-  <div class="alphabet-buttons hidden"></div>
-  <button class="start-btn">Play Again</button>
+  <footer>
+    <div class="keyboard hidden"></div>
+    <button class="play-again-button">Play Again</button>
+  </footer>
+
+  <img src="./img/cole.svg" alt="" class="cole">
 
   <script src="js/main.js" type="module"></script>
 </body>
